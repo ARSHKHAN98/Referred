@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const passoutSchema = mongoose.Schema({
 	YOP: {
 		type: String,
+		required: true,
 	},
 	currentCompany: {
 		type: String,
@@ -15,9 +16,11 @@ const passoutSchema = mongoose.Schema({
 	},
 	numberOfJobPosted: {
 		type: Number,
+		default: 0,
 	},
-	email: {
+	userID: {
 		type: String,
+		required: true,
 	},
 });
 
