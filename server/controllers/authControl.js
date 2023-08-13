@@ -9,11 +9,14 @@ dotenv.config();
 
 class AuthControl {
 	async signup(req, res) {
-		const { username, name, email } = req.body;
-		const password = bcrypt.hashSync(req.body.password, 16);
-		const user = await UserSchema.create({ username, name, email, password }); // optional chize
-
-		res.status(200).send(user);
+		try {
+			const { username, name, email } = req.body;
+			const password = bcrypt.hashSync(req.body.password, 12);
+			const user = await UserSchema.create({ username, name, email, password }); // optional chize
+			res.status(200).send(user);
+		} catch (err) {
+			res.status(501).send({ message: err.message });
+		}
 	}
 
 	async studentSignup(req, res) {
@@ -36,22 +39,14 @@ class AuthControl {
 			}
 
 			const pass = bcrypt.compareSync(req.body.password, user.password);
-			const { email, password } = user;
 
 			if (!pass) {
 				res.status(402).send({ message: "Incorrect Password" });
 			}
 
-			const token = jwt.sign({ email, password }, secret, {
-				algorithm: "HS256",
-				allowInsecureKeySizes: true,
-				expiresIn: 86400,
-			});
-
-			res.cookie("token", token, {
-				maxAge: 1000 * 60 * 60 * 24 * 30,
-				httpOnly: true,
-			});
+			const accessToken = jwt.sign({ user: user }, process.env.TOKEN_SECRET, { expiresIn: "1h" });
+			const refreshToken = jwt.sign({ user: user }, process.env.TOKEN_SECRET, { expiresIn: "1d" });
+			res.cookie("refreshToken", refreshToken, { httpOnly: true, sameSite: "strict" }).header("accessToken", accessToken);
 
 			res.status(200).send(user);
 		} catch (err) {
