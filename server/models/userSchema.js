@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	userName: {
+	username: {
 		type: String,
 		required: true,
 	},
@@ -13,10 +13,10 @@ const userSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	Linkedin: {
+	linkedin: {
 		type: String,
 	},
-	Github: {
+	github: {
 		type: String,
 	},
 	email: {
@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
 	profilePhoto: {
 		type: String,
 	},
-	Followings: [
+	following: [
 		{
 			type: String,
 		},
