@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
 	profilePhoto: {
 		type: String,
 	},
-	following: [
+	applied: [
 		{
 			type: String,
 		},

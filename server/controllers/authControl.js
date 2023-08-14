@@ -50,7 +50,6 @@ class AuthControl {
 	async login(req, res) {
 		try {
 			const user = await UserSchema.findOne({ email: req.body.email });
-			const secret = process.env.TOKEN_SECRET;
 
 			if (!user) {
 				res.status(401).send({ message: "User not found" });

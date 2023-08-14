@@ -1,13 +1,21 @@
 import mongoose from "mongoose";
 
-const jonPostSchema = mongoose.Schema({
-	desciption: {
-		type: String,
-	},
+const jobPostSchema = mongoose.Schema({
 	userID: {
 		type: String,
+		required: true,
 	},
-	timestamps: Date,
+	description: {
+		type: String,
+	},
+	companyName: {
+		type: String,
+		required: true,
+	},
+	role: {
+		type: String,
+		required: true,
+	},
 });
 
-export default mongoose.model("referredJobPost", jonPostSchema);
+export default mongoose.model("referredJobPost", jobPostSchema);
