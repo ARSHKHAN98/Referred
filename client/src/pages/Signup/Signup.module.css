@@ -1,5 +1,4 @@
-.left{
-    flex:1;
+.cardBody{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,13 +6,11 @@
     min-width: 50%;
 }
 
-.header{
-    font-size: 40px;
+.cardHeader{
+    font-size: 50px;
     margin-bottom: 20px;
-}
-
-.subheader{
-    font-size: 25px;
+    padding: 10px;
+    color:rgb(63, 63, 63);
 }
 
 .cardWrapper{
@@ -25,15 +22,47 @@
 
 .card{
     padding: 20px;
+    font-size: 20px;
+    line-height: 1.5;
     width: 800px;
     height: 600px;
     max-height: 90%;
+    flex-direction: column;
     max-width: 90%;
+    flex-direction: col;
     background-color:white;
-    /* border: 5px solid black; */
     border-radius: 20px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    color:rgb(63, 63, 63);
+}
+
+.cardInput{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+input{
+    width: 90%;
+    padding:5px;
+    border-radius: 5px;
+}
+
+button{
+    margin-top: 20px;
+    width: 100px;
+    padding:10px;
+    border-radius: 10px;
+    background-color:#212529;
+    color:white
+}
+.buttons{
+    display: flex;
+    justify-content: space-around;
     align-items: center;
 }

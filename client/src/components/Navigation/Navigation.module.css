@@ -1,3 +1,28 @@
 .navbar{
     padding: 20px 0;
+    width: 100%;
+    font-weight: bold;
+    font-size: 25px;
+    color: themed("logo");
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    height: 50px;
+    position: sticky;
+    top: 0;
+    background-color: themed("bg");
+    color: themed("textColor");
+    z-index: 999;
+}
+
+
+
+button{
+    margin-top: 20px;
+    width: 100px;
+    padding:10px;
+    border-radius: 10px;
+    background-color:#212529;
+    color:white
 }

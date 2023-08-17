@@ -53,19 +53,17 @@ class AuthControl {
 
 			if (!user) {
 				res.status(401).send({ message: "User not found" });
+			} else {
+				const pass = bcrypt.compareSync(req.body.password, user.password);
+				if (!pass) {
+					res.status(402).send({ message: "Incorrect Password" });
+				} else {
+					const accessToken = jwt.sign({ user: user }, process.env.TOKEN_SECRET, { expiresIn: "1h" });
+					const refreshToken = jwt.sign({ user: user }, process.env.TOKEN_SECRET, { expiresIn: "1d" });
+					await res.cookie("refreshToken", refreshToken, { httpOnly: true, sameSite: "strict" }).header("accessToken", accessToken);
+					res.status(200).send(user);
+				}
 			}
-
-			const pass = bcrypt.compareSync(req.body.password, user.password);
-
-			if (!pass) {
-				res.status(402).send({ message: "Incorrect Password" });
-			}
-
-			const accessToken = jwt.sign({ user: user }, process.env.TOKEN_SECRET, { expiresIn: "1h" });
-			const refreshToken = jwt.sign({ user: user }, process.env.TOKEN_SECRET, { expiresIn: "1d" });
-			res.cookie("refreshToken", refreshToken, { httpOnly: true, sameSite: "strict" }).header("accessToken", accessToken);
-
-			res.status(200).send(user);
 		} catch (err) {
 			res.status(501).send({ message: err.message });
 		}

@@ -9,10 +9,16 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
+app.use(
+	cors({
+		origin: "http://localhost:3000",
+	})
+);
+
 dotenv.config();
 
 app.use(bodyParser.json({ limit: "50mb" }));
-app.use (cookieParser());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
 app.use(routes);
@@ -21,11 +27,6 @@ app.use(
 		name: "refereed-session",
 		keys: [process.env.SECRET],
 		httpOnly: true,
-	})
-);
-app.use(
-	cors({
-		origin: "http://localhost:3000",
 	})
 );
 
