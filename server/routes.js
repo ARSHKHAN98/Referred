@@ -10,8 +10,8 @@ const router = express.Router();
 
 router.post("/api/login", AuthControl.login);
 router.post("/api/signup", AuthMiddleware.userExists, AuthControl.signup);
-router.post("/api/studentsignup", AuthMiddleware.verifyToken, AuthControl.studentSignup);
-router.post("/api/passoutsignup", AuthMiddleware.verifyToken, AuthControl.passoutSignup);
+// router.post("/api/studentsignup", AuthControl.studentSignup);
+// router.post("/api/passoutsignup", AuthControl.passoutSignup);
 router.post("/api/request", [AuthMiddleware.verifyToken, requestMiddleware.requestCheck], requestControl.post);
 router.post("/api/requests", AuthMiddleware.verifyToken, requestControl.fetch);
 router.post("/api/approve", [AuthMiddleware.verifyToken, requestMiddleware.expiredCheck], requestControl.approv);

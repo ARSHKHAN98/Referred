@@ -31,6 +31,21 @@ const userSchema = mongoose.Schema({
 			type: String,
 		},
 	],
+	resume: {
+		type: String,
+	},
+	YOP: {
+		type: Number,
+	},
+	branch: {
+		type: String,
+	},
+	role: {
+		type: String,
+	},
+	currentCompany: {
+		type: String,
+	},
 	timestamps: Date,
 });
 

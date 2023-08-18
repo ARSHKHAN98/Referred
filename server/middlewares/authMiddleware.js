@@ -22,24 +22,24 @@ class AuthMiddleware {
 
 		if (!accessToken && !refreshToken) {
 			res.status(401).send("Refresh Token Expired");
-		}
-
-		try {
-			const decoded = jwt.verify(accessToken, process.env.TOKEN_SECRET);
-			req.user = decoded.user;
-			next();
-		} catch (err) {
-			if (!refreshToken) res.status(501).send({ message: err.message });
-		}
-
-		try {
-			const decoded = jwt.verify(refreshToken, process.env.TOKEN_SECRET);
-			const accessToken = jwt.sign({ user: decoded.user }, process.env.TOKEN_SECRET, { expiresIn: "1h" });
-			req.user = decoded.user;
-			res.cookie("refreshToken", refreshToken, { httpOnly: true, sameSite: "strict" }).header("accessToken", accessToken);
-			next();
-		} catch (err) {
-			res.status(501).send({ message: err.message });
+		} else if (accessToken && refreshToken) {
+			try {
+				const decoded = jwt.verify(accessToken, process.env.TOKEN_SECRET);
+				req.user = decoded.user;
+				next();
+			} catch (err) {
+				if (!refreshToken) res.status(501).send({ message: err.message });
+			}
+		} else if (refreshToken && !accessToken) {
+			try {
+				const decoded = jwt.verify(refreshToken, process.env.TOKEN_SECRET);
+				const accessToken = jwt.sign({ user: decoded.user }, process.env.TOKEN_SECRET, { expiresIn: "1h" });
+				req.user = decoded.user;
+				res.cookie("refreshToken", refreshToken, { httpOnly: true, sameSite: "strict" }).header("accessToken", accessToken);
+				next();
+			} catch (err) {
+				res.status(501).send({ message: err.message });
+			}
 		}
 	}
 }

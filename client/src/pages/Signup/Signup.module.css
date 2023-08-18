@@ -10,7 +10,7 @@
     font-size: 50px;
     margin-bottom: 20px;
     padding: 10px;
-    color:rgb(63, 63, 63);
+    color:z;
 }
 
 .cardWrapper{
@@ -25,7 +25,7 @@
     font-size: 20px;
     line-height: 1.5;
     width: 800px;
-    height: 600px;
+    /* height: 600px; */
     max-height: 90%;
     flex-direction: column;
     max-width: 90%;

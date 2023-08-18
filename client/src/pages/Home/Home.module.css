@@ -1,0 +1,20 @@
+.homeWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.column1{
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.column{
+    flex:2;
+    display: flex;
+    justify-content: spaace between;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
